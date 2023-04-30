@@ -1,16 +1,14 @@
 package com.kevinchege47.Spring.JPA.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+//@ToString(exclude = "course" )
 public class CourseMaterial {
     @Id
     @SequenceGenerator(name ="course_material_sequence",sequenceName = "course_material_sequence",allocationSize = 1)
@@ -19,7 +17,7 @@ public class CourseMaterial {
     private Long courseMaterialId;
     private String title;
     private String url;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER )
     @JoinColumn(
             name = "course_id",
             referencedColumnName = "courseId"
